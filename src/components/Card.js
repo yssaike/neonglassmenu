@@ -1,4 +1,4 @@
-import { designTokens } from '../config/designTokens.js';
+import { colors, typography, spacing, borderRadius, shadows, animation } from '../config/designTokens.js';
 
 export function createCard({ title, value, change, changeType = 'positive', icon = '' }) {
   // Inject card-specific styles
@@ -8,65 +8,65 @@ export function createCard({ title, value, change, changeType = 'positive', icon
     style.id = styleId;
     style.textContent = `
       .linear-card {
-        background: ${designTokens.colors.surface};
-        border: 1px solid ${designTokens.colors.border};
-        border-radius: ${designTokens.borderRadius.lg};
-        padding: ${designTokens.spacing.lg};
-        transition: all ${designTokens.animation.duration.normal} ${designTokens.animation.easing.smooth};
-        box-shadow: ${designTokens.shadows.sm};
+        background: ${colors.background.primary};
+        border: 1px solid ${colors.border.light};
+        border-radius: ${borderRadius.lg};
+        padding: ${spacing.lg};
+        transition: all ${animation.duration.normal} ${animation.easing.smooth};
+        box-shadow: ${shadows.sm};
       }
 
       .linear-card:hover {
-        border-color: ${designTokens.colors.borderHover};
-        box-shadow: ${designTokens.shadows.md};
+        border-color: ${colors.border.medium};
+        box-shadow: ${shadows.md};
         transform: translateY(-1px);
       }
 
       .card-header {
         display: flex;
         align-items: center;
-        gap: ${designTokens.spacing.sm};
-        margin-bottom: ${designTokens.spacing.md};
+        gap: ${spacing.sm};
+        margin-bottom: ${spacing.md};
       }
 
       .card-icon {
         font-size: 1.25rem;
-        color: ${designTokens.colors.textSecondary};
+        color: ${colors.text.secondary};
       }
 
       .card-title {
-        font-size: ${designTokens.typography.fontSize.sm};
-        font-weight: ${designTokens.typography.fontWeight.medium};
-        color: ${designTokens.colors.textSecondary};
+        font-size: ${typography.fontSize.sm};
+        font-weight: ${typography.fontWeight.medium};
+        color: ${colors.text.secondary};
         text-transform: uppercase;
         letter-spacing: 0.05em;
       }
 
       .card-value {
-        font-size: ${designTokens.typography.fontSize.xl2};
-        font-weight: ${designTokens.typography.fontWeight.semibold};
-        color: ${designTokens.colors.textPrimary};
-        margin-bottom: ${designTokens.spacing.xs};
+        font-size: ${typography.fontSize['2xl']};
+        font-weight: ${typography.fontWeight.semibold};
+        color: ${colors.text.primary};
+        margin-bottom: ${spacing.xs};
       }
 
       .card-change {
-        font-size: ${designTokens.typography.fontSize.sm};
-        font-weight: ${designTokens.typography.fontWeight.medium};
+        font-size: ${typography.fontSize.sm};
+        font-weight: ${typography.fontWeight.medium};
         display: flex;
         align-items: center;
-        gap: ${designTokens.spacing.xs};
+        gap: ${spacing.xs};
       }
 
       .card-change.positive {
-        color: ${designTokens.colors.success};
+        color: ${colors.accent.green};
       }
 
       .card-change.negative {
-        color: ${designTokens.colors.error};
+        color: ${colors.accent.red};
       }
 
       .card-change.neutral {
-        color: ${designTokens.colors.textSecondary};
+        color: ${colors.text.secondary};
       }
     `;
     document.head.appendChild(style);

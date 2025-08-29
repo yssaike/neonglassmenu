@@ -100,3 +100,15 @@ export const shadows = {
   lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
   xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
 };
+
+export const animation = {
+  duration: {
+    fast: '150ms',
+    normal: '250ms',
+    slow: '350ms'
+  },
+  easing: {
+    smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+  }
+};
