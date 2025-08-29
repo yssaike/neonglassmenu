@@ -361,7 +361,7 @@ body {
   color: white;
   border-color: var(--neon-primary);
   box-shadow: 
-    0 0 20px var(--neon-primary),
+    0 0 20px var(--neon-primary);
   transform: translateY(-2px);
   background: rgba(0, 245, 255, 0.1);
 }
