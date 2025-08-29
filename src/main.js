@@ -270,7 +270,7 @@ body {
   text-shadow: 
     0 0 5px var(--neon-primary),
     0 0 10px var(--neon-primary),
-    0 0 20px var(--neon-primary);
+    0 0 20px var(--neon-primary),
     0 0 40px var(--neon-primary);
   animation: neonPulse 2s ease-in-out infinite alternate;
   letter-spacing: 0.2em;
@@ -366,10 +366,6 @@ body {
   background: rgba(0, 245, 255, 0.1);
 }
 
-.settings-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
 .menu-icon {
   font-size: 1.2rem;
   filter: drop-shadow(0 0 5px currentColor);
