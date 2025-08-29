@@ -52,7 +52,7 @@ body {
 .settings-trigger:hover {
   transform: scale(1.1) rotate(90deg);
   box-shadow: 
-    0 0 20px rgba(var(--neon-primary), 0.5),
+    0 0 20px rgba(0, 245, 255, 0.5),
     0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -69,18 +69,11 @@ body {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.settings-panel.active {
-  opacity: 1;
-  visibility: visible;
 }
 
 .settings-panel > div {
@@ -96,12 +89,6 @@ body {
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transform: scale(0.8);
-  transition: transform 0.3s ease;
-}
-
-.settings-panel.active > div {
-  transform: scale(1);
 }
 
 .settings-header {
@@ -176,14 +163,14 @@ body {
 
 .preset-btn:hover {
   border-color: var(--neon-primary);
-  box-shadow: 0 0 15px rgba(var(--neon-primary), 0.3);
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
   transform: translateY(-2px);
 }
 
 .preset-btn.active {
   border-color: var(--neon-primary);
-  box-shadow: 0 0 20px rgba(var(--neon-primary), 0.4);
-  background: rgba(var(--neon-primary), 0.1);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+  background: rgba(0, 245, 255, 0.1);
 }
 
 .preset-preview {
@@ -227,7 +214,7 @@ body {
 
 .color-input-group input[type="color"]:hover {
   border-color: var(--neon-primary);
-  box-shadow: 0 0 15px rgba(var(--neon-primary), 0.3);
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
 }
 
 .glass-menu {
@@ -270,7 +257,7 @@ body {
   text-shadow: 
     0 0 5px var(--neon-primary),
     0 0 10px var(--neon-primary),
-    0 0 20px var(--neon-primary);
+    0 0 20px var(--neon-primary),
     0 0 40px var(--neon-primary);
   animation: neonPulse 2s ease-in-out infinite alternate;
   letter-spacing: 0.2em;
@@ -366,10 +353,6 @@ body {
   background: rgba(0, 245, 255, 0.1);
 }
 
-.settings-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
 .menu-icon {
   font-size: 1.2rem;
   filter: drop-shadow(0 0 5px currentColor);
