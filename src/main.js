@@ -1,12 +1,8 @@
-import './style.css';
-import { createMenu } from './components/menu.js';
-import { createBackgroundEffects } from './components/backgroundEffects.js';
-import { createSettingsTrigger } from './components/settingsTrigger.js';
-import { createSettingsPanel } from './components/settingsPanel.js';
-import { initializeColors } from './utils/colorManager.js';
-import { initializeMenuAnimations, initializeHoverAnimations, initializeBackgroundAnimations } from './animations/menuAnimations.js';
-import { initializeSettingsAnimations } from './animations/settingsAnimations.js';
-import { initializeSettingsHandlers } from './handlers/settingsHandlers.js';
+import './styles/linear.css';
+import { createNavigation } from './components/Navigation.js';
+import { createHeader } from './components/Header.js';
+import { createDashboard } from './components/Dashboard.js';
+import { initializeLinearAnimations, initializeLinearInteractions } from './animations/linearAnimations.js';
 
 // Load GSAP from CDN
 const script = document.createElement('script');
@@ -15,23 +11,53 @@ script.onload = initializeApp;
 document.head.appendChild(script);
 
 function initializeApp() {
-  // Initialize colors
-  initializeColors();
-  
-  // Create UI components
+  // Create the Linear-inspired interface
   document.querySelector('#app').innerHTML = `
-    ${createBackgroundEffects()}
-    ${createSettingsTrigger()}
-    ${createMenu()}
+    ${createNavigation()}
+    ${createHeader()}
+    ${createDashboard()}
   `;
 
-  // Create settings panel
-  createSettingsPanel();
+  // Initialize animations and interactions
+  initializeLinearAnimations();
+  initializeLinearInteractions();
+  
+  // Add responsive navigation toggle for mobile
+  addMobileNavigation();
+}
 
-  // Initialize all functionality
-  initializeMenuAnimations();
-  initializeHoverAnimations();
-  initializeBackgroundAnimations();
-  initializeSettingsAnimations();
-  initializeSettingsHandlers();
+function addMobileNavigation() {
+  // Add mobile menu toggle functionality
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 1024px) {
+      .linear-navigation {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      
+      .linear-navigation.nav-open {
+        transform: translateX(0);
+      }
+      
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  `;
+  document.head.appendChild(style);
 }
