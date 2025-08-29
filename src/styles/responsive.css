@@ -1,0 +1,55 @@
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glass-menu {
+    margin: 1rem;
+    padding: 1.5rem;
+    min-width: unset;
+    width: calc(100% - 2rem);
+  }
+  
+  .neon-title {
+    font-size: 2rem;
+  }
+  
+  .menu-link {
+    padding: 0.8rem 1rem;
+    gap: 0.8rem;
+  }
+  
+  .menu-text {
+    font-size: 0.9rem;
+  }
+  
+  .settings-trigger {
+    top: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .settings-icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-menu {
+    padding: 1rem;
+  }
+  
+  .neon-title {
+    font-size: 1.8rem;
+  }
+  
+  .menu-items {
+    gap: 0.8rem;
+  }
+  
+  .preset-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .color-inputs {
+    grid-template-columns: 1fr;
+  }
+}
