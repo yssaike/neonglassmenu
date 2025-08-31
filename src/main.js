@@ -3,6 +3,7 @@ import { createNavigation } from './components/Navigation.js';
 import { createHeader } from './components/Header.js';
 import { createDashboard } from './components/Dashboard.js';
 import { initializeLinearAnimations, initializeLinearInteractions } from './animations/linearAnimations.js';
+import './utils/interactions.js';
 
 // Load GSAP from CDN
 const script = document.createElement('script');

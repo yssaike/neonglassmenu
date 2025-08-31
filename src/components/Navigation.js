@@ -1,13 +1,16 @@
 import { colors, typography, spacing, borderRadius, shadows } from '../config/designTokens.js';
+import { appState } from '../utils/state.js';
 
 export function createNavigation() {
   const navItems = [
-    { icon: '🏠', label: 'Dashboard', active: true },
-    { icon: '📋', label: 'Projects', active: false },
-    { icon: '👥', label: 'Team', active: false },
-    { icon: '📊', label: 'Analytics', active: false },
-    { icon: '⚙️', label: 'Settings', active: false }
+    { icon: '🏠', label: 'Dashboard', view: 'dashboard' },
+    { icon: '📋', label: 'Projects', view: 'projects' },
+    { icon: '👥', label: 'Team', view: 'team' },
+    { icon: '📊', label: 'Analytics', view: 'analytics' },
+    { icon: '⚙️', label: 'Settings', view: 'settings' }
   ];
+
+  const currentView = appState.getState().currentView;
 
   const navigationHTML = `
     <nav class="linear-navigation">
@@ -22,7 +25,7 @@ export function createNavigation() {
         <ul class="nav-items">
           ${navItems.map(item => `
             <li class="nav-item">
-              <a href="#" class="nav-link ${item.active ? 'nav-link--active' : ''}">
+              <a href="#" class="nav-link ${currentView === item.view ? 'nav-link--active' : ''}" data-view="${item.view}">
                 <span class="nav-icon">${item.icon}</span>
                 <span class="nav-label">${item.label}</span>
               </a>
@@ -205,5 +208,31 @@ export function createNavigation() {
     document.head.appendChild(style);
   }
 
+  // Add navigation functionality
+  setTimeout(() => {
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const view = e.currentTarget.dataset.view;
+        appState.setCurrentView(view);
+        
+        // Update active states
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('nav-link--active'));
+        e.currentTarget.classList.add('nav-link--active');
+        
+        // Update page title
+        const pageTitle = document.querySelector('.page-title');
+        if (pageTitle) {
+          pageTitle.textContent = view.charAt(0).toUpperCase() + view.slice(1);
+        }
+        
+        // Update breadcrumb
+        const breadcrumbCurrent = document.querySelector('.breadcrumb-item--current');
+        if (breadcrumbCurrent) {
+          breadcrumbCurrent.textContent = view.charAt(0).toUpperCase() + view.slice(1);
+        }
+      });
+    });
+  }, 0);
   return navigationHTML;
 }

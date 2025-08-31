@@ -1,19 +1,16 @@
 import { createCard } from './Card.js';
 import { createButton } from './Button.js';
 import { colors, spacing, typography, borderRadius, shadows } from '../config/designTokens.js';
+import { appState } from '../utils/state.js';
 
 export function createDashboard() {
+  const state = appState.getState();
+  
   const stats = [
-    { label: 'Total Projects', value: '24', change: '+12%', trend: 'up' },
-    { label: 'Active Issues', value: '156', change: '-8%', trend: 'down' },
-    { label: 'Team Members', value: '12', change: '+2', trend: 'up' },
-    { label: 'Completed', value: '89%', change: '+5%', trend: 'up' }
-  ];
-
-  const recentProjects = [
-    { name: 'Mobile App Redesign', status: 'In Progress', priority: 'High', assignee: 'Sarah Chen' },
-    { name: 'API Documentation', status: 'Review', priority: 'Medium', assignee: 'Mike Johnson' },
-    { name: 'User Research', status: 'Completed', priority: 'Low', assignee: 'Emma Wilson' }
+    { label: 'Total Projects', value: state.stats.totalProjects.toString(), change: '+12%', trend: 'up' },
+    { label: 'Active Issues', value: state.stats.activeIssues.toString(), change: '-8%', trend: 'down' },
+    { label: 'Team Members', value: state.stats.teamMembers.toString(), change: '+2', trend: 'up' },
+    { label: 'Completed', value: `${state.stats.completionRate}%`, change: '+5%', trend: 'up' }
   ];
 
   const dashboardHTML = `
@@ -43,15 +40,23 @@ export function createDashboard() {
             <div class="card-title">Recent Projects</div>
             <div class="card-content">
               <div class="projects-list">
-                ${recentProjects.map(project => `
-                  <div class="project-item">
+                ${state.projects.slice(0, 3).map(project => `
+                  <div class="project-item" data-project-id="${project.id}">
                     <div class="project-info">
                       <div class="project-name">${project.name}</div>
                       <div class="project-assignee">Assigned to ${project.assignee}</div>
+                      <div class="project-progress">
+                        <div class="progress-bar">
+                          <div class="progress-fill" style="width: ${project.progress}%"></div>
+                        </div>
+                        <span class="progress-text">${project.progress}%</span>
+                      </div>
                     </div>
                     <div class="project-meta">
-                      <span class="project-status project-status--${project.status.toLowerCase().replace(' ', '-')}">${project.status}</span>
-                      <span class="project-priority project-priority--${project.priority.toLowerCase()}">${project.priority}</span>
+                      <span class="project-status project-status--${project.status}">${project.status.replace('-', ' ')}</span>
+                      <span class="project-priority project-priority--${project.priority}">${project.priority}</span>
+                      <button class="project-action" data-action="edit" data-project-id="${project.id}">✏️</button>
+                      <button class="project-action" data-action="delete" data-project-id="${project.id}">🗑️</button>
                     </div>
                   </div>
                 `).join('')}
@@ -366,5 +371,43 @@ export function createDashboard() {
     document.head.appendChild(style);
   }
 
+  // Add dashboard functionality
+  setTimeout(() => {
+    // Project item interactions
+    document.querySelectorAll('.project-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('project-action')) {
+          const projectId = parseInt(item.dataset.projectId);
+          showProjectDetails(projectId);
+        }
+      });
+    });
+
+    // Project action buttons
+    document.querySelectorAll('.project-action').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const action = button.dataset.action;
+        const projectId = parseInt(button.dataset.projectId);
+        
+        if (action === 'edit') {
+          editProject(projectId);
+        } else if (action === 'delete') {
+          deleteProject(projectId);
+        }
+      });
+    });
+
+    // Quick action items
+    document.querySelectorAll('.action-item').forEach((item, index) => {
+      item.addEventListener('click', () => {
+        const actions = ['createIssue', 'deployProject', 'inviteTeam'];
+        const actionFunction = actions[index];
+        if (window[actionFunction]) {
+          window[actionFunction]();
+        }
+      });
+    });
+  }, 0);
   return dashboardHTML;
 }

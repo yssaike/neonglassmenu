@@ -1,3 +1,5 @@
+import { appState } from '../utils/state.js';
+
 export function initializeLinearAnimations() {
   // Smooth entrance animations
   gsap.set('.linear-navigation', { x: -280, opacity: 0 });
@@ -84,6 +86,27 @@ export function initializeLinearInteractions() {
     
     item.addEventListener('mouseleave', () => {
       gsap.to(item, { x: 0, duration: 0.2, ease: "power2.out" });
+    });
+  });
+
+  // Subscribe to state changes for real-time updates
+  appState.subscribe((state) => {
+    // Animate stats updates
+    document.querySelectorAll('.stat-value').forEach((element, index) => {
+      const stats = [
+        state.stats.totalProjects,
+        state.stats.activeIssues,
+        state.stats.teamMembers,
+        `${state.stats.completionRate}%`
+      ];
+      
+      if (element.textContent !== stats[index].toString()) {
+        gsap.fromTo(element, 
+          { scale: 1.2, color: colors.accent.mint },
+          { scale: 1, color: colors.text.primary, duration: 0.3, ease: "power2.out" }
+        );
+        element.textContent = stats[index];
+      }
     });
   });
 }

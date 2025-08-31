@@ -1,16 +1,19 @@
 import { colors, typography, spacing, borderRadius } from '../config/designTokens.js';
 import { createButton } from './Button.js';
+import { appState } from '../utils/state.js';
 
 export function createHeader() {
+  const state = appState.getState();
+  
   const headerHTML = `
     <header class="linear-header">
       <div class="header-content">
         <div class="header-left">
-          <h1 class="page-title">Dashboard</h1>
+          <h1 class="page-title">${state.currentView.charAt(0).toUpperCase() + state.currentView.slice(1)}</h1>
           <div class="breadcrumb">
             <span class="breadcrumb-item">Home</span>
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item breadcrumb-item--current">Dashboard</span>
+            <span class="breadcrumb-item breadcrumb-item--current">${state.currentView.charAt(0).toUpperCase() + state.currentView.slice(1)}</span>
           </div>
         </div>
         
@@ -20,17 +23,19 @@ export function createHeader() {
               text: 'New Project', 
               variant: 'primary', 
               icon: '+',
-              size: 'sm'
+              size: 'sm',
+              onClick: () => showNewProjectModal()
             })}
             ${createButton({ 
               text: 'Import', 
               variant: 'secondary', 
-              size: 'sm'
+              size: 'sm',
+              onClick: () => showImportModal()
             })}
           </div>
           
           <div class="header-profile">
-            <div class="profile-avatar">JD</div>
+            <div class="profile-avatar">${state.user.avatar}</div>
           </div>
         </div>
       </div>
