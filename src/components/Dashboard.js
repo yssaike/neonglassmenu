@@ -1,6 +1,6 @@
 import { createCard } from './Card.js';
 import { createButton } from './Button.js';
-import { colors, spacing, typography } from '../config/designTokens.js';
+import { colors, spacing, typography, borderRadius } from '../config/designTokens.js';
 
 export function createDashboard() {
   const stats = [
