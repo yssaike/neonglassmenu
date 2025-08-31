@@ -250,7 +250,7 @@ window.inviteTeam = function() {
 };
 
 // Utility functions
-function refreshDashboard() {
+async function refreshDashboard() {
   const dashboard = document.querySelector('.linear-dashboard');
   if (dashboard) {
     const { createDashboard } = await import('../components/Dashboard.js');
