@@ -369,5 +369,5 @@ export function createDashboard() {
     document.head.appendChild(style);
   }
 
-  return headerHTML;
+  return dashboardHTML;
 }
