@@ -1,95 +1,91 @@
 import { colors, typography, spacing, borderRadius, shadows, animation } from '../config/designTokens.js';
 
-export function createCard({ title, value, change, changeType = 'positive', icon = '' }) {
+export function createCard({ 
+  title = null, 
+  content = '', 
+  variant = 'default',
+  hover = true,
+  className = ''
+}) {
   // Inject card-specific styles
-  const styleId = 'card-styles';
+  const styleId = 'fritaero-card-styles';
   if (!document.getElementById(styleId)) {
     const style = document.createElement('style');
     style.id = styleId;
     style.textContent = `
-      .linear-card {
+      .fritaero-card {
         background: ${colors.background.primary};
         border: 1px solid ${colors.border.light};
-        border-radius: ${borderRadius.lg};
-        padding: ${spacing.lg};
+        border-radius: ${borderRadius.xl};
+        padding: ${spacing.xl};
         transition: all ${animation.duration.normal} ${animation.easing.smooth};
         box-shadow: ${shadows.sm};
+        position: relative;
+        overflow: hidden;
       }
 
-      .linear-card:hover {
-        border-color: ${colors.border.medium};
-        box-shadow: ${shadows.md};
-        transform: translateY(-1px);
+      .fritaero-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, ${colors.accent.coral}, ${colors.accent.sunshine}, ${colors.accent.mint});
+        opacity: 0;
+        transition: opacity ${animation.duration.normal} ease;
       }
 
-      .card-header {
-        display: flex;
-        align-items: center;
-        gap: ${spacing.sm};
-        margin-bottom: ${spacing.md};
+      .fritaero-card--hover:hover {
+        border-color: ${colors.border.accent};
+        box-shadow: ${shadows.lg};
+        transform: translateY(-2px);
       }
 
-      .card-icon {
-        font-size: 1.25rem;
-        color: ${colors.text.secondary};
+      .fritaero-card--hover:hover::before {
+        opacity: 1;
+      }
+
+      .fritaero-card--accent {
+        background: linear-gradient(135deg, ${colors.background.secondary}, ${colors.background.tertiary});
+        border-color: ${colors.border.accent};
+      }
+
+      .fritaero-card--minimal {
+        border: none;
+        box-shadow: none;
+        background: transparent;
       }
 
       .card-title {
-        font-size: ${typography.fontSize.sm};
-        font-weight: ${typography.fontWeight.medium};
-        color: ${colors.text.secondary};
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .card-value {
-        font-size: ${typography.fontSize['2xl']};
+        font-size: ${typography.fontSize.lg};
         font-weight: ${typography.fontWeight.semibold};
         color: ${colors.text.primary};
-        margin-bottom: ${spacing.xs};
-      }
-
-      .card-change {
-        font-size: ${typography.fontSize.sm};
-        font-weight: ${typography.fontWeight.medium};
+        margin-bottom: ${spacing.lg};
         display: flex;
         align-items: center;
-        gap: ${spacing.xs};
+        gap: ${spacing.md};
       }
 
-      .card-change.positive {
-        color: ${colors.accent.green};
-      }
-
-      .card-change.negative {
-        color: ${colors.accent.red};
-      }
-
-      .card-change.neutral {
+      .card-content {
         color: ${colors.text.secondary};
+        line-height: ${typography.lineHeight.relaxed};
       }
     `;
     document.head.appendChild(style);
   }
 
-  const card = document.createElement('div');
-  card.className = 'linear-card';
-  
-  const changeIcon = changeType === 'positive' ? '↗' : changeType === 'negative' ? '↘' : '→';
-  
-  card.innerHTML = `
-    <div class="card-header">
-      ${icon ? `<span class="card-icon">${icon}</span>` : ''}
-      <span class="card-title">${title}</span>
-    </div>
-    <div class="card-value">${value}</div>
-    ${change ? `
-      <div class="card-change ${changeType}">
-        <span>${changeIcon}</span>
-        <span>${change}</span>
-      </div>
-    ` : ''}
-  `;
+  const cardClasses = [
+    'fritaero-card',
+    hover ? 'fritaero-card--hover' : '',
+    variant !== 'default' ? `fritaero-card--${variant}` : '',
+    className
+  ].filter(Boolean).join(' ');
 
-  return card;
+  return `
+    <div class="${cardClasses}">
+      ${title ? `<div class="card-title">${title}</div>` : ''}
+      <div class="card-content">${content}</div>
+    </div>
+  `;
 }

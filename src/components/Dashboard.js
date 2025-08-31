@@ -1,6 +1,6 @@
 import { createCard } from './Card.js';
 import { createButton } from './Button.js';
-import { colors, spacing, typography, borderRadius } from '../config/designTokens.js';
+import { colors, spacing, typography, borderRadius, shadows } from '../config/designTokens.js';
 
 export function createDashboard() {
   const stats = [
@@ -22,8 +22,8 @@ export function createDashboard() {
         <!-- Stats Cards -->
         <div class="stats-section">
           <div class="stats-grid">
-            ${stats.map(stat => createCard({
-              content: `
+            ${stats.map(stat => `
+              <div class="fritaero-card fritaero-card--hover">
                 <div class="stat-card">
                   <div class="stat-value">${stat.value}</div>
                   <div class="stat-label">${stat.label}</div>
@@ -32,17 +32,16 @@ export function createDashboard() {
                     ${stat.change}
                   </div>
                 </div>
-              `,
-              variant: 'default'
-            })).join('')}
+              </div>
+            `).join('')}
           </div>
         </div>
 
         <!-- Recent Projects -->
         <div class="projects-section">
-          ${createCard({
-            title: 'Recent Projects',
-            content: `
+          <div class="fritaero-card fritaero-card--hover">
+            <div class="card-title">Recent Projects</div>
+            <div class="card-content">
               <div class="projects-list">
                 ${recentProjects.map(project => `
                   <div class="project-item">
@@ -60,16 +59,15 @@ export function createDashboard() {
               <div class="card-actions">
                 ${createButton({ text: 'View All Projects', variant: 'ghost', size: 'sm' })}
               </div>
-            `,
-            variant: 'default'
-          })}
+            </div>
+          </div>
         </div>
 
         <!-- Quick Actions -->
         <div class="actions-section">
-          ${createCard({
-            title: 'Quick Actions',
-            content: `
+          <div class="fritaero-card fritaero-card--hover">
+            <div class="card-title">Quick Actions</div>
+            <div class="card-content">
               <div class="quick-actions">
                 <div class="action-item">
                   <div class="action-icon">📝</div>
@@ -93,9 +91,8 @@ export function createDashboard() {
                   </div>
                 </div>
               </div>
-            `,
-            variant: 'default'
-          })}
+            </div>
+          </div>
         </div>
       </div>
     </div>
