@@ -72,10 +72,15 @@ class AppState {
     const newProject = {
       id: Date.now(),
       ...project,
-      progress: 0
+      progress: 0,
+      createdAt: new Date().toISOString()
     };
     this.setState({
-      projects: [...this.state.projects, newProject]
+      projects: [...this.state.projects, newProject],
+      stats: {
+        ...this.state.stats,
+        totalProjects: this.state.stats.totalProjects + 1
+      }
     });
   }
 

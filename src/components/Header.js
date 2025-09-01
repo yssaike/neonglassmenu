@@ -1,5 +1,4 @@
 import { colors, typography, spacing, borderRadius, shadows, animation } from '../config/designTokens.js';
-import { createButton } from './Button.js';
 import { appState } from '../utils/state.js';
 
 export function createHeader() {
@@ -19,19 +18,13 @@ export function createHeader() {
         
         <div class="header-right">
           <div class="header-actions">
-            ${createButton({ 
-              text: 'New Project', 
-              variant: 'primary', 
-              icon: '+',
-              size: 'sm',
-              onClick: () => showNewProjectModal()
-            })}
-            ${createButton({ 
-              text: 'Import', 
-              variant: 'secondary', 
-              size: 'sm',
-              onClick: () => showImportModal()
-            })}
+            <button class="linear-button linear-button--primary linear-button--sm" onclick="showNewProjectModal()">
+              <span class="button-icon">+</span>
+              <span class="button-text">New Project</span>
+            </button>
+            <button class="linear-button linear-button--secondary linear-button--sm" onclick="showImportModal()">
+              <span class="button-text">Import</span>
+            </button>
           </div>
           
           <div class="header-profile">
@@ -145,6 +138,67 @@ export function createHeader() {
       box-shadow: ${shadows.neuro.floating};
     }
 
+    .linear-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: ${spacing.sm};
+      font-family: ${typography.fontFamily.sans.join(', ')};
+      font-weight: ${typography.fontWeight.medium};
+      border-radius: ${borderRadius.md};
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      outline: none;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .linear-button--primary {
+      background: linear-gradient(145deg, ${colors.primary[500]}, ${colors.primary[600]});
+      color: ${colors.text.inverse};
+      box-shadow: ${shadows.neuro.raised};
+    }
+
+    .linear-button--primary:hover {
+      background: linear-gradient(145deg, ${colors.primary[600]}, ${colors.primary[700]});
+      box-shadow: ${shadows.neuro.floating};
+      transform: translateY(-2px);
+    }
+
+    .linear-button--secondary {
+      background: ${colors.background.primary};
+      color: ${colors.text.primary};
+      box-shadow: ${shadows.neuro.raised};
+    }
+
+    .linear-button--secondary:hover {
+      background: ${colors.background.secondary};
+      box-shadow: ${shadows.neuro.floating};
+      transform: translateY(-2px);
+    }
+
+    .linear-button:active {
+      box-shadow: ${shadows.neuro.pressed};
+      transform: translateY(1px);
+    }
+
+    .linear-button--sm {
+      padding: ${spacing.sm} ${spacing.md};
+      font-size: ${typography.fontSize.sm};
+      height: 32px;
+    }
+
+    .button-icon {
+      display: flex;
+      align-items: center;
+      font-size: 1em;
+    }
+
+    .button-text {
+      white-space: nowrap;
+    }
     @media (max-width: 768px) {
       .linear-header {
         left: 0;

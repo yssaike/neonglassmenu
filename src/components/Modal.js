@@ -40,14 +40,14 @@ export function createModal({ title, content, onSubmit = null }) {
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(163, 177, 198, 0.3);
       backdrop-filter: blur(4px);
     }
 
     .modal-container {
-      background: ${colors.background.primary};
+      background: linear-gradient(145deg, #f0f0f3, #e6e7eb);
       border-radius: ${borderRadius.xl};
-      box-shadow: ${shadows.neuro.floating}, 0 25px 50px rgba(163, 177, 198, 0.25);
+      box-shadow: 12px 12px 24px rgba(163, 177, 198, 0.3), -12px -12px 24px rgba(255, 255, 255, 1);
       max-width: 500px;
       width: 90%;
       max-height: 80vh;
@@ -58,6 +58,16 @@ export function createModal({ title, content, onSubmit = null }) {
       border: none;
     }
 
+    .modal-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, ${colors.accent.coral}, ${colors.accent.sunshine}, ${colors.accent.mint});
+      border-radius: ${borderRadius.xl} ${borderRadius.xl} 0 0;
+    }
     .modal-header {
       display: flex;
       align-items: center;
@@ -92,13 +102,18 @@ export function createModal({ title, content, onSubmit = null }) {
       cursor: pointer;
       padding: ${spacing.sm};
       border-radius: ${borderRadius.sm};
-      box-shadow: ${shadows.neuro.subtle};
+      background: #f0f0f3;
+      box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.8);
       transition: all 0.2s ${animation.easing.spring};
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .modal-close:hover {
-      background: ${colors.background.primary};
-      box-shadow: ${shadows.neuro.raised};
+      box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.8);
       color: ${colors.text.primary};
       transform: scale(1.1);
     }
@@ -131,18 +146,18 @@ export function createModal({ title, content, onSubmit = null }) {
     .form-group select {
       padding: ${spacing.md} ${spacing.lg};
       border: none;
-      box-shadow: ${shadows.neuro.pressed};
+      box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
       border-radius: ${borderRadius.md};
       font-size: ${typography.fontSize.base};
-      background: ${colors.background.primary};
+      background: #f0f0f3;
       color: ${colors.text.primary};
       transition: all 0.2s ${animation.easing.spring};
+      outline: none;
     }
 
     .form-group input:focus,
     .form-group select:focus {
-      outline: none;
-      box-shadow: ${shadows.neuro.pressed}, 0 0 0 3px rgba(14, 165, 233, 0.2);
+      box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.8), 0 0 0 3px rgba(14, 165, 233, 0.2);
       transform: scale(1.02);
     }
 
@@ -178,10 +193,10 @@ export function createModal({ title, content, onSubmit = null }) {
 
     .btn-cancel {
       padding: ${spacing.md} ${spacing.lg};
-      background: ${colors.background.primary};
+      background: #f0f0f3;
       color: ${colors.text.secondary};
       border: none;
-      box-shadow: ${shadows.neuro.raised};
+      box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.2), -6px -6px 12px rgba(255, 255, 255, 0.8);
       border-radius: ${borderRadius.md};
       cursor: pointer;
       font-weight: ${typography.fontWeight.medium};
@@ -189,13 +204,13 @@ export function createModal({ title, content, onSubmit = null }) {
     }
 
     .btn-cancel:hover {
-      box-shadow: ${shadows.neuro.floating};
+      box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.15), -8px -8px 16px rgba(255, 255, 255, 0.9);
       color: ${colors.text.primary};
       transform: translateY(-2px);
     }
 
     .btn-cancel:active {
-      box-shadow: ${shadows.neuro.pressed};
+      box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.2), inset -3px -3px 6px rgba(255, 255, 255, 0.8);
       transform: translateY(1px);
     }
 
@@ -204,7 +219,7 @@ export function createModal({ title, content, onSubmit = null }) {
       background: linear-gradient(145deg, ${colors.primary[500]}, ${colors.primary[600]});
       color: ${colors.text.inverse};
       border: none;
-      box-shadow: ${shadows.neuro.raised};
+      box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.2), -6px -6px 12px rgba(255, 255, 255, 0.8);
       border-radius: ${borderRadius.md};
       cursor: pointer;
       font-weight: ${typography.fontWeight.medium};
@@ -214,11 +229,11 @@ export function createModal({ title, content, onSubmit = null }) {
     .btn-primary:hover {
       background: linear-gradient(145deg, ${colors.primary[600]}, ${colors.primary[700]});
       transform: translateY(-2px);
-      box-shadow: ${shadows.neuro.floating};
+      box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.15), -8px -8px 16px rgba(255, 255, 255, 0.9);
     }
 
     .btn-primary:active {
-      box-shadow: ${shadows.neuro.pressed};
+      box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.2), inset -3px -3px 6px rgba(255, 255, 255, 0.8);
       transform: translateY(1px);
     }
 
@@ -372,6 +387,16 @@ export function createModal({ title, content, onSubmit = null }) {
         e.preventDefault();
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
+        
+        // Validate required fields
+        const requiredFields = ['name', 'assignee', 'priority', 'dueDate'];
+        const missingFields = requiredFields.filter(field => !data[field] || data[field].trim() === '');
+        
+        if (missingFields.length > 0) {
+          showNotification('Please fill in all required fields', 'error');
+          return;
+        }
+        
         onSubmit(data);
         modal.remove();
       });

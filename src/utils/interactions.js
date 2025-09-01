@@ -3,21 +3,32 @@ import { createModal } from '../components/Modal.js';
 
 // Global interaction handlers
 window.showNewProjectModal = function() {
+  // Remove any existing modal first
+  const existingModal = document.querySelector('.fritaero-modal');
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  // Set default due date to 2 weeks from now
+  const defaultDueDate = new Date();
+  defaultDueDate.setDate(defaultDueDate.getDate() + 14);
+  const formattedDate = defaultDueDate.toISOString().split('T')[0];
+
   const modal = createModal({
     title: 'Create New Project',
     content: `
       <form id="new-project-form" class="modal-form">
         <div class="form-group">
           <label for="project-name">Project Name</label>
-          <input type="text" id="project-name" name="name" required placeholder="Enter project name">
+          <input type="text" id="project-name" name="name" required placeholder="Enter project name" class="linear-input">
         </div>
         <div class="form-group">
           <label for="project-assignee">Assignee</label>
-          <input type="text" id="project-assignee" name="assignee" required placeholder="Enter assignee name">
+          <input type="text" id="project-assignee" name="assignee" required placeholder="Enter assignee name" class="linear-input">
         </div>
         <div class="form-group">
           <label for="project-priority">Priority</label>
-          <select id="project-priority" name="priority" required>
+          <select id="project-priority" name="priority" required class="linear-input">
             <option value="low">Low</option>
             <option value="medium" selected>Medium</option>
             <option value="high">High</option>
@@ -25,7 +36,7 @@ window.showNewProjectModal = function() {
         </div>
         <div class="form-group">
           <label for="project-due">Due Date</label>
-          <input type="date" id="project-due" name="dueDate" required>
+          <input type="date" id="project-due" name="dueDate" required class="linear-input" value="${formattedDate}">
         </div>
         <div class="form-actions">
           <button type="button" class="btn-cancel">Cancel</button>
@@ -42,6 +53,7 @@ window.showNewProjectModal = function() {
         dueDate: formData.dueDate
       });
       refreshDashboard();
+      showNotification('Project created successfully!', 'success');
     }
   });
   
