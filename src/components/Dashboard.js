@@ -1,6 +1,6 @@
 import { createCard } from './Card.js';
 import { createButton } from './Button.js';
-import { colors, spacing, typography, borderRadius, shadows } from '../config/designTokens.js';
+import { colors, spacing, typography, borderRadius, shadows, animation } from '../config/designTokens.js';
 import { appState } from '../utils/state.js';
 
 export function createDashboard() {
