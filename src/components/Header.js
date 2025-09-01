@@ -1,4 +1,4 @@
-import { colors, typography, spacing, borderRadius } from '../config/designTokens.js';
+import { colors, typography, spacing, borderRadius, shadows, animation } from '../config/designTokens.js';
 import { createButton } from './Button.js';
 import { appState } from '../utils/state.js';
 
