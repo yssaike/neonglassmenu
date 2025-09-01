@@ -15,11 +15,11 @@ export function createCard({
     style.textContent = `
       .fritaero-card {
         background: ${colors.background.primary};
-        border: 1px solid ${colors.border.light};
+        border: none;
         border-radius: ${borderRadius.xl};
         padding: ${spacing.xl};
-        transition: all ${animation.duration.normal} ${animation.easing.smooth};
-        box-shadow: ${shadows.sm};
+        transition: all ${animation.duration.normal} ${animation.easing.spring};
+        box-shadow: ${shadows.neuro.raised};
         position: relative;
         overflow: hidden;
       }
@@ -37,9 +37,8 @@ export function createCard({
       }
 
       .fritaero-card--hover:hover {
-        border-color: ${colors.border.accent};
-        box-shadow: ${shadows.lg};
-        transform: translateY(-2px);
+        box-shadow: ${shadows.neuro.floating};
+        transform: translateY(-4px);
       }
 
       .fritaero-card--hover:hover::before {
@@ -47,13 +46,12 @@ export function createCard({
       }
 
       .fritaero-card--accent {
-        background: linear-gradient(135deg, ${colors.background.secondary}, ${colors.background.tertiary});
-        border-color: ${colors.border.accent};
+        background: linear-gradient(135deg, ${colors.background.primary}, ${colors.background.secondary});
+        box-shadow: ${shadows.neuro.floating};
       }
 
       .fritaero-card--minimal {
-        border: none;
-        box-shadow: none;
+        box-shadow: ${shadows.neuro.subtle};
         background: transparent;
       }
 

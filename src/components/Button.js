@@ -10,19 +10,22 @@ export function createButton({
 }) {
   const variants = {
     primary: `
-      background: ${colors.primary[900]};
+      background: linear-gradient(145deg, ${colors.primary[500]}, ${colors.primary[600]});
       color: ${colors.text.inverse};
-      border: 1px solid ${colors.primary[900]};
+      border: none;
+      box-shadow: ${shadows.neuro.raised};
     `,
     secondary: `
       background: ${colors.background.primary};
       color: ${colors.text.primary};
-      border: 1px solid ${colors.border.medium};
+      border: none;
+      box-shadow: ${shadows.neuro.raised};
     `,
     ghost: `
       background: transparent;
       color: ${colors.text.secondary};
-      border: 1px solid transparent;
+      border: none;
+      box-shadow: ${shadows.neuro.subtle};
     `
   };
 
@@ -87,9 +90,9 @@ export function createButton({
     }
 
     .linear-button--primary:hover:not(:disabled) {
-      background: ${colors.primary[800]};
-      box-shadow: ${shadows.md};
-      transform: translateY(-1px);
+      background: linear-gradient(145deg, ${colors.primary[600]}, ${colors.primary[700]});
+      box-shadow: ${shadows.neuro.floating};
+      transform: translateY(-2px);
     }
 
     .linear-button--secondary {
@@ -99,8 +102,8 @@ export function createButton({
 
     .linear-button--secondary:hover:not(:disabled) {
       background: ${colors.background.secondary};
-      border-color: ${colors.border.dark};
-      box-shadow: ${shadows.md};
+      box-shadow: ${shadows.neuro.floating};
+      transform: translateY(-2px);
     }
 
     .linear-button--ghost {
@@ -110,6 +113,12 @@ export function createButton({
     .linear-button--ghost:hover:not(:disabled) {
       background: ${colors.background.secondary};
       color: ${colors.text.primary};
+      box-shadow: ${shadows.neuro.raised};
+    }
+
+    .linear-button:active:not(:disabled) {
+      box-shadow: ${shadows.neuro.pressed};
+      transform: translateY(1px);
     }
 
     .linear-button--sm { ${sizes.sm} }

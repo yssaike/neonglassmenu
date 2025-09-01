@@ -60,36 +60,39 @@ export function createInput({
       font-family: ${typography.fontFamily.sans.join(', ')};
       font-size: ${typography.fontSize.base};
       padding: ${spacing.md} ${spacing.lg};
-      border: 1px solid ${colors.border.medium};
+      border: none;
       border-radius: ${borderRadius.md};
       background: ${colors.background.primary};
+      box-shadow: ${shadows.neuro.pressed};
       color: ${colors.text.primary};
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
       outline: none;
       height: 40px;
     }
 
     .linear-input:focus {
-      border-color: ${colors.accent.blue};
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      box-shadow: ${shadows.neuro.pressed}, 0 0 0 3px rgba(14, 165, 233, 0.2);
+      transform: scale(1.02);
     }
 
     .linear-input:hover:not(:focus):not(:disabled) {
-      border-color: ${colors.border.dark};
+      box-shadow: ${shadows.neuro.raised};
     }
 
     .linear-input:disabled {
       background: ${colors.background.secondary};
       color: ${colors.text.tertiary};
+      box-shadow: ${shadows.neuro.pressed};
       cursor: not-allowed;
+      opacity: 0.6;
     }
 
     .linear-input--error {
-      border-color: ${colors.accent.red};
+      box-shadow: ${shadows.neuro.pressed}, 0 0 0 2px rgba(255, 107, 107, 0.3);
     }
 
     .linear-input--error:focus {
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      box-shadow: ${shadows.neuro.pressed}, 0 0 0 3px rgba(255, 107, 107, 0.2);
     }
 
     .input-error {

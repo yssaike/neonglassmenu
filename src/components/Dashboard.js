@@ -111,7 +111,7 @@ export function createDashboard() {
       margin-top: 80px;
       padding: ${spacing['2xl']};
       min-height: calc(100vh - 80px);
-      background: ${colors.background.secondary};
+      background: transparent;
     }
 
     .dashboard-grid {
@@ -134,6 +134,15 @@ export function createDashboard() {
     .stat-card {
       text-align: center;
       padding: ${spacing.lg} 0;
+      background: ${colors.background.primary};
+      border-radius: ${borderRadius.lg};
+      box-shadow: ${shadows.neuro.raised};
+      transition: all 0.2s ${animation.easing.spring};
+    }
+
+    .stat-card:hover {
+      box-shadow: ${shadows.neuro.floating};
+      transform: translateY(-2px);
     }
 
     .stat-value {
@@ -191,14 +200,16 @@ export function createDashboard() {
       justify-content: space-between;
       align-items: center;
       padding: ${spacing.lg};
-      border: 1px solid ${colors.border.light};
+      background: ${colors.background.primary};
+      border: none;
       border-radius: ${borderRadius.md};
-      transition: all 0.15s ease;
+      box-shadow: ${shadows.neuro.subtle};
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .project-item:hover {
-      border-color: ${colors.border.medium};
-      background: ${colors.background.secondary};
+      box-shadow: ${shadows.neuro.raised};
+      transform: translateX(4px);
     }
 
     .project-info {
@@ -294,26 +305,35 @@ export function createDashboard() {
       align-items: center;
       gap: ${spacing.lg};
       padding: ${spacing.lg};
-      border: 1px solid ${colors.border.light};
+      background: ${colors.background.primary};
+      border: none;
       border-radius: ${borderRadius.md};
+      box-shadow: ${shadows.neuro.subtle};
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .action-item:hover {
-      border-color: ${colors.border.medium};
-      background: ${colors.background.secondary};
+      box-shadow: ${shadows.neuro.raised};
+      transform: translateY(-2px);
     }
 
     .action-icon {
       width: 48px;
       height: 48px;
-      background: ${colors.background.secondary};
+      background: linear-gradient(145deg, ${colors.background.secondary}, ${colors.background.tertiary});
+      box-shadow: ${shadows.neuro.pressed};
       border-radius: ${borderRadius.lg};
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: ${typography.fontSize.xl};
+      transition: all 0.2s ease;
+    }
+
+    .action-item:hover .action-icon {
+      box-shadow: ${shadows.neuro.raised};
+      transform: scale(1.05);
     }
 
     .action-content {

@@ -53,7 +53,8 @@ export function createNavigation() {
       width: 280px;
       height: 100vh;
       background: ${colors.background.primary};
-      border-right: 1px solid ${colors.border.light};
+      border: none;
+      box-shadow: 8px 0 16px rgba(163, 177, 198, 0.15);
       display: flex;
       flex-direction: column;
       position: fixed;
@@ -64,7 +65,18 @@ export function createNavigation() {
 
     .nav-header {
       padding: ${spacing.xl};
-      border-bottom: 1px solid ${colors.border.light};
+      border: none;
+      position: relative;
+    }
+
+    .nav-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: ${spacing.lg};
+      right: ${spacing.lg};
+      height: 1px;
+      background: linear-gradient(90deg, transparent, ${colors.border.light}, transparent);
     }
 
     .nav-logo {
@@ -76,9 +88,10 @@ export function createNavigation() {
     .logo-icon {
       width: 32px;
       height: 32px;
-      background: ${colors.accent.blue};
+      background: linear-gradient(145deg, ${colors.accent.ocean}, ${colors.primary[500]});
       color: ${colors.text.inverse};
       border-radius: ${borderRadius.md};
+      box-shadow: ${shadows.neuro.subtle};
       display: flex;
       align-items: center;
       justify-content: center;
@@ -115,19 +128,23 @@ export function createNavigation() {
       text-decoration: none;
       color: ${colors.text.secondary};
       border-radius: ${borderRadius.md};
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
       font-size: ${typography.fontSize.base};
       font-weight: ${typography.fontWeight.medium};
       position: relative;
+      margin: 0 ${spacing.sm};
     }
 
     .nav-link:hover {
-      background: ${colors.background.secondary};
+      background: ${colors.background.primary};
+      box-shadow: ${shadows.neuro.subtle};
       color: ${colors.text.primary};
+      transform: translateX(4px);
     }
 
     .nav-link--active {
-      background: ${colors.background.secondary};
+      background: ${colors.background.primary};
+      box-shadow: ${shadows.neuro.pressed};
       color: ${colors.text.primary};
       font-weight: ${typography.fontWeight.semibold};
     }
@@ -135,13 +152,14 @@ export function createNavigation() {
     .nav-link--active::before {
       content: '';
       position: absolute;
-      left: 0;
+      left: -${spacing.sm};
       top: 50%;
       transform: translateY(-50%);
-      width: 3px;
+      width: 4px;
       height: 20px;
-      background: ${colors.accent.blue};
-      border-radius: 0 2px 2px 0;
+      background: linear-gradient(180deg, ${colors.accent.coral}, ${colors.accent.sunshine});
+      border-radius: ${borderRadius.sm};
+      box-shadow: 2px 0 4px rgba(255, 107, 107, 0.3);
     }
 
     .nav-icon {
@@ -155,7 +173,18 @@ export function createNavigation() {
 
     .nav-footer {
       padding: ${spacing.lg};
-      border-top: 1px solid ${colors.border.light};
+      border: none;
+      position: relative;
+    }
+
+    .nav-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: ${spacing.lg};
+      right: ${spacing.lg};
+      height: 1px;
+      background: linear-gradient(90deg, transparent, ${colors.border.light}, transparent);
     }
 
     .user-profile {
@@ -164,20 +193,24 @@ export function createNavigation() {
       gap: ${spacing.md};
       padding: ${spacing.md};
       border-radius: ${borderRadius.md};
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
       cursor: pointer;
+      box-shadow: ${shadows.neuro.subtle};
     }
 
     .user-profile:hover {
-      background: ${colors.background.secondary};
+      background: ${colors.background.primary};
+      box-shadow: ${shadows.neuro.raised};
+      transform: scale(1.02);
     }
 
     .user-avatar {
       width: 40px;
       height: 40px;
-      background: ${colors.accent.purple};
+      background: linear-gradient(145deg, ${colors.accent.lavender}, ${colors.accent.peach});
       color: ${colors.text.inverse};
       border-radius: ${borderRadius.lg};
+      box-shadow: ${shadows.neuro.raised};
       display: flex;
       align-items: center;
       justify-content: center;

@@ -48,7 +48,8 @@ export function createHeader() {
     .linear-header {
       height: 80px;
       background: ${colors.background.primary};
-      border-bottom: 1px solid ${colors.border.light};
+      border: none;
+      box-shadow: 0 4px 12px rgba(163, 177, 198, 0.15);
       position: fixed;
       top: 0;
       left: 280px;
@@ -126,20 +127,22 @@ export function createHeader() {
     .profile-avatar {
       width: 36px;
       height: 36px;
-      background: ${colors.accent.purple};
+      background: linear-gradient(145deg, ${colors.accent.lavender}, ${colors.accent.peach});
       color: ${colors.text.inverse};
       border-radius: ${borderRadius.lg};
+      box-shadow: ${shadows.neuro.raised};
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: ${typography.fontWeight.semibold};
       font-size: ${typography.fontSize.sm};
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .profile-avatar:hover {
       transform: scale(1.05);
+      box-shadow: ${shadows.neuro.floating};
     }
 
     @media (max-width: 768px) {

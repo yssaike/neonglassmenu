@@ -278,16 +278,26 @@ function showNotification(message, type = 'info') {
       right: 20px;
       padding: 16px 24px;
       border-radius: 8px;
+      border: none;
+      box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.2), -8px -8px 16px rgba(255, 255, 255, 0.8);
       color: white;
       font-weight: 500;
       z-index: 1000;
       animation: slideIn 0.3s ease;
     }
     
-    .fritaero-notification--info { background: #3b82f6; }
-    .fritaero-notification--success { background: #10b981; }
-    .fritaero-notification--warning { background: #f59e0b; }
-    .fritaero-notification--error { background: #ef4444; }
+    .fritaero-notification--info { 
+      background: linear-gradient(145deg, #3b82f6, #2563eb);
+    }
+    .fritaero-notification--success { 
+      background: linear-gradient(145deg, #10b981, #059669);
+    }
+    .fritaero-notification--warning { 
+      background: linear-gradient(145deg, #f59e0b, #d97706);
+    }
+    .fritaero-notification--error { 
+      background: linear-gradient(145deg, #ef4444, #dc2626);
+    }
     
     @keyframes slideIn {
       from { transform: translateX(100%); opacity: 0; }

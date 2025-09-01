@@ -47,7 +47,7 @@ export function createModal({ title, content, onSubmit = null }) {
     .modal-container {
       background: ${colors.background.primary};
       border-radius: ${borderRadius.xl};
-      box-shadow: ${shadows.xl};
+      box-shadow: ${shadows.neuro.floating}, 0 25px 50px rgba(163, 177, 198, 0.25);
       max-width: 500px;
       width: 90%;
       max-height: 80vh;
@@ -55,6 +55,7 @@ export function createModal({ title, content, onSubmit = null }) {
       position: relative;
       z-index: 1;
       animation: modalSlideIn 0.3s ease;
+      border: none;
     }
 
     .modal-header {
@@ -62,7 +63,18 @@ export function createModal({ title, content, onSubmit = null }) {
       align-items: center;
       justify-content: space-between;
       padding: ${spacing.xl};
-      border-bottom: 1px solid ${colors.border.light};
+      border: none;
+      position: relative;
+    }
+
+    .modal-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: ${spacing.xl};
+      right: ${spacing.xl};
+      height: 1px;
+      background: linear-gradient(90deg, transparent, ${colors.border.light}, transparent);
     }
 
     .modal-title {
@@ -80,12 +92,15 @@ export function createModal({ title, content, onSubmit = null }) {
       cursor: pointer;
       padding: ${spacing.sm};
       border-radius: ${borderRadius.sm};
-      transition: all 0.15s ease;
+      box-shadow: ${shadows.neuro.subtle};
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .modal-close:hover {
-      background: ${colors.background.secondary};
+      background: ${colors.background.primary};
+      box-shadow: ${shadows.neuro.raised};
       color: ${colors.text.primary};
+      transform: scale(1.1);
     }
 
     .modal-content {
@@ -115,19 +130,20 @@ export function createModal({ title, content, onSubmit = null }) {
     .form-group input,
     .form-group select {
       padding: ${spacing.md} ${spacing.lg};
-      border: 1px solid ${colors.border.medium};
+      border: none;
+      box-shadow: ${shadows.neuro.pressed};
       border-radius: ${borderRadius.md};
       font-size: ${typography.fontSize.base};
       background: ${colors.background.primary};
       color: ${colors.text.primary};
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .form-group input:focus,
     .form-group select:focus {
       outline: none;
-      border-color: ${colors.primary[500]};
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      box-shadow: ${shadows.neuro.pressed}, 0 0 0 3px rgba(14, 165, 233, 0.2);
+      transform: scale(1.02);
     }
 
     .form-group input[type="range"] {
@@ -162,52 +178,71 @@ export function createModal({ title, content, onSubmit = null }) {
 
     .btn-cancel {
       padding: ${spacing.md} ${spacing.lg};
-      background: ${colors.background.secondary};
+      background: ${colors.background.primary};
       color: ${colors.text.secondary};
-      border: 1px solid ${colors.border.medium};
+      border: none;
+      box-shadow: ${shadows.neuro.raised};
       border-radius: ${borderRadius.md};
       cursor: pointer;
       font-weight: ${typography.fontWeight.medium};
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .btn-cancel:hover {
-      background: ${colors.background.tertiary};
+      box-shadow: ${shadows.neuro.floating};
       color: ${colors.text.primary};
+      transform: translateY(-2px);
+    }
+
+    .btn-cancel:active {
+      box-shadow: ${shadows.neuro.pressed};
+      transform: translateY(1px);
     }
 
     .btn-primary {
       padding: ${spacing.md} ${spacing.lg};
-      background: ${colors.primary[500]};
+      background: linear-gradient(145deg, ${colors.primary[500]}, ${colors.primary[600]});
       color: ${colors.text.inverse};
-      border: 1px solid ${colors.primary[500]};
+      border: none;
+      box-shadow: ${shadows.neuro.raised};
       border-radius: ${borderRadius.md};
       cursor: pointer;
       font-weight: ${typography.fontWeight.medium};
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .btn-primary:hover {
-      background: ${colors.primary[600]};
-      transform: translateY(-1px);
-      box-shadow: ${shadows.md};
+      background: linear-gradient(145deg, ${colors.primary[600]}, ${colors.primary[700]});
+      transform: translateY(-2px);
+      box-shadow: ${shadows.neuro.floating};
+    }
+
+    .btn-primary:active {
+      box-shadow: ${shadows.neuro.pressed};
+      transform: translateY(1px);
     }
 
     .btn-danger {
       padding: ${spacing.md} ${spacing.lg};
-      background: ${colors.accent.coral};
+      background: linear-gradient(145deg, ${colors.accent.coral}, #ff5252);
       color: ${colors.text.inverse};
-      border: 1px solid ${colors.accent.coral};
+      border: none;
+      box-shadow: ${shadows.neuro.raised};
       border-radius: ${borderRadius.md};
       cursor: pointer;
       font-weight: ${typography.fontWeight.medium};
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .btn-danger:hover {
-      background: #ff5252;
-      transform: translateY(-1px);
-      box-shadow: ${shadows.md};
+      background: linear-gradient(145deg, #ff5252, #ff4444);
+      transform: translateY(-2px);
+      box-shadow: ${shadows.neuro.floating};
+    }
+
+    .btn-danger:active {
+      box-shadow: ${shadows.neuro.pressed};
+      transform: translateY(1px);
     }
 
     .import-options {
@@ -220,15 +255,17 @@ export function createModal({ title, content, onSubmit = null }) {
       align-items: center;
       gap: ${spacing.lg};
       padding: ${spacing.lg};
-      border: 1px solid ${colors.border.light};
+      background: ${colors.background.primary};
+      border: none;
+      box-shadow: ${shadows.neuro.subtle};
       border-radius: ${borderRadius.md};
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ${animation.easing.spring};
     }
 
     .import-option:hover {
-      border-color: ${colors.border.accent};
-      background: ${colors.background.tertiary};
+      box-shadow: ${shadows.neuro.raised};
+      transform: translateY(-2px);
     }
 
     .import-icon {
